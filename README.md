@@ -34,18 +34,14 @@ Things you may want to cover:
 | last_name_kannji    | string  | null: false |
 | first_name_katakana | string  | null: false |
 | last_name_katakana  | string  | null: false |
-| birth_year          | integer | null: false |
-| birth_month         | integer | null: false |
-| birth_day           | integer | null: false |
-| log_in?             | boolean | null: false |
+| birth_day           | date    | null: false |
 
 
 ### Association
 
 - has_many :items
 - has_many :comments
-- has_many :credit_card
-- has_many :shipping_address
+- has_many :transaction_information
 
 ## items テーブル
 
@@ -55,20 +51,15 @@ Things you may want to cover:
 | image                   | mediumblob | null: false                    |
 | price                   | integer    | null: false                    |
 | explanation             | text       | null: false                    |
-| exhibitor               | references | null: false, foreign_key: true |
-| category                | string     | null: false                    |
-| status                  | string     | null: false                    |
-| shipping_fee_burden     | string     | null: false                    |
-| shipping_area           | string     | null: false                    |
-| estimated_delivery_date | string     | null: false                    |
-| sold_out?               | boolean    | null: false                    |
+| user                    | references | null: false, foreign_key: true |
+| category_id             | integer    | null: false                    |
+| status_id               | integer    | null: false                    |
 
 ### Association
 
-- belongs_to :users
+- belongs_to :user
 - has_many :comments
-- belongs_to :credit_card
-- belongs_to :shipping_address
+- has_one :transaction_information
 
 ## comments テーブル
 
@@ -78,35 +69,37 @@ Things you may want to cover:
 
 ### Association
 
-- belongs_to :users
-- belongs_to :comments
+- belongs_to :user
+- belongs_to :item
 
-## credit_card クレジットカード情報テーブル
+## transaction_information 取引に関する情報管理テーブル
 
-| Column           | Type    | Options     |
-| ---------------- | ------- | ----------- |
-| card_number      | integer | null: false |
-| expiration_month | integer | null: false |
-| expiration_year  | integer | null: false |
-| security_code    | integer | null: false |
+| Column                     | Type       | Options     |
+| -------------------------- | ---------- | ----------- |
+| user                       | references | null: false |
+| item                       | references | null: false |
+| shipping_fee_burden_id     | integer    | null: false |
+| shipping_area_id           | integer    | null: false |
+| estimated_delivery_date_id | integer    | null: false |
+| sold_out?                  | boolean    | null: false |
 
 ### Association
 
-- belongs_to :users
-- has_many :items
+- belongs_to :user
+- belongs_to :item
+- has_one :shipping_address
 
-## shipping_address 配送先テーブル
+## shipping_addresses 配送先テーブル
 
 | Column         | Type    | Options     |
 | -------------- | ------- | ----------- |
-| postal_code    | integer | null: false |
-| prefectures    | string  | null: false |
+| postal_code    | string  | null: false |
+| prefectures_id | integer | null: false |
 | municipalities | string  | null: false |
 | address        | string  | null: false |
-| building_name  | string  | null: false |
-| phone_number   | integer | null: false |
+| building_name  | string  |             |
+| phone_number   | string  | null: false |
 
 ### Association
 
-- belongs_to :users
-- has_many :items
+- belongs_to :transaction_information
