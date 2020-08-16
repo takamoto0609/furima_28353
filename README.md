@@ -40,7 +40,7 @@ Things you may want to cover:
 ### Association
 
 - has_many :items
-- has_many :transaction_information
+- has_many :transactions
 
 ## items テーブル
 
@@ -60,15 +60,14 @@ Things you may want to cover:
 ### Association
 
 - belongs_to :user
-- has_one :transaction_information
+- has_one :transaction
 
-## transaction_information 取引に関する情報管理テーブル
+## transactions 取引に関する情報管理テーブル
 
 | Column                     | Type       | Options                        |
 | -------------------------- | ---------- | ------------------------------ |
 | user                       | references | null: false, foreign_key: true |
 | item                       | references | null: false, foreign_key: true |
-| sold_out?                  | boolean    | null: false                    |
 
 ### Association
 
@@ -86,8 +85,8 @@ Things you may want to cover:
 | address                 | string     | null: false                    |
 | building_name           | string     |                                |
 | phone_number            | string     | null: false                    |
-| transaction_information | references | null: false, foreign_key: true |
+| transaction             | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :transaction_information
+- belongs_to :transaction
