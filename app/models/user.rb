@@ -18,9 +18,6 @@ class User < ApplicationRecord
   validates_format_of :password, with: PASSWORD_REGEX, message: 'は半角英数の両方を含めて設定してください。'
 
   # ユーザー本名は必須、全角（漢字・ひらがな・カタカナ）で入力
-  # NAME_KANNJI_REGEX = /\A[ぁ-んァ-ン一-龥]/.freeze
-  # validates_format_of :first_name_kannji, with: NAME_KANNJI_REGEX, message: 'は全角で入力してください。'
-  # validates_format_of :last_name_kannji, with: NAME_KANNJI_REGEX, message: 'は全角で入力してください。'
   with_options presence: true, format: { with: /\A[ぁ-んァ-ン一-龥]/, message: "は全角で入力してください。"} do
     validates :first_name_kannji
     validates :last_name_kannji
