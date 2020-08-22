@@ -5,7 +5,11 @@ class ItemsController < ApplicationController
   end
 
   def new #トップページの「出品」ボタンに対応するアクション
-    @item = Item.new
+    if user_signed_in?
+      @item = Item.new
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def create # new.html.erbの出品確定ボタンに対応するアクション
@@ -21,7 +25,7 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :price, :explanation, :user_id, :category_id, :status_id, :shipping_fee_burden_id, :shipping_area_id, :estimated_delivery_date_id)
+    params.require(:item).permit(:name, :price, :explanation, :user_id, :category_id, :status_id, :shipping_fee_burden_id, :shipping_area_id, :estimated_delivery_date_id, :image).merge(user_id: current_user.id)
   end
 
 end

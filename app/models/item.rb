@@ -1,7 +1,8 @@
 class Item < ApplicationRecord
   # 各テーブルとのアソシエーション
-  # belongs_to: user
+  belongs_to :user
   # has_one: transaction　後で追加
+  has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   # belongs_toは参照するという意味
