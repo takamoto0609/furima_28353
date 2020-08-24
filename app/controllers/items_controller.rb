@@ -23,7 +23,13 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
+    @item                    = Item.find(params[:id])
+    @category                = Category.find(@item.category_id)
+    @status                  = Status.find(@item.status_id)
+    @shipping_fee_burden     = ShippingFeeBurden.find(@item.shipping_fee_burden_id)
+    @shipping_area           = ShippingArea.find(@item.shipping_area_id)
+    @estimated_delivery_date = EstimatedDeliveryDate.find(@item.estimated_delivery_date_id)
+    @user                    = User.find(@item.user_id)
   end
 
   private
