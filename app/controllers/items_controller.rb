@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
 
   def index
-    @items = Item.all #Itemテーブルのデータ全てを@itemsに代入
+    @items = Item.all.order(id: "DESC")#Itemテーブルのデータ全てを@itemsに代入、新しい順番で表示
   end
 
   def new #トップページの「出品」ボタンに対応するアクション
