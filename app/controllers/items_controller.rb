@@ -1,10 +1,10 @@
 class ItemsController < ApplicationController
 
   def index
-    @items = Item.all.order(id: "DESC")#Itemテーブルのデータ全てを@itemsに代入、新しい順番で表示
+    @items = Item.all.order(id: "DESC")
   end
 
-  def new #トップページの「出品」ボタンに対応するアクション
+  def new
     if user_signed_in?
       @item = Item.new
     else
@@ -12,7 +12,7 @@ class ItemsController < ApplicationController
     end
   end
 
-  def create # new.html.erbの出品確定ボタンに対応するアクション
+  def create
     @item = Item.new(item_params)
     if @item.valid?
       @item.save
