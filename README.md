@@ -75,7 +75,7 @@ Things you may want to cover:
 - belongs_to :item
 - has_one :shipping_address
 
-## shipping_addresses 配送先テーブル
+## addresses 配送先テーブル
 
 | Column                  | Type       | Options                        |
 | ----------------------- | ---------- | ------------------------------ |
