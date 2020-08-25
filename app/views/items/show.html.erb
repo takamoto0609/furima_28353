@@ -33,7 +33,7 @@
 
     <%# 商品が売れていない場合も後で追加 %>
     <% if user_signed_in? && current_user.id != @item.user_id %>
-      <%= link_to '購入画面に進む', "new_address_path" ,class:"item-red-btn"%>
+      <%= link_to '購入画面に進む', new_purchase_path ,class:"item-red-btn"%>
     <% end %>
 
     <div class="item-explain-box">

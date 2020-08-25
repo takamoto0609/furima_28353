@@ -40,7 +40,7 @@ Things you may want to cover:
 ### Association
 
 - has_many :items
-- has_many :transactions
+- has_many :purchases
 
 ## items テーブル
 
@@ -60,9 +60,9 @@ Things you may want to cover:
 ### Association
 
 - belongs_to :user
-- has_one :transaction
+- has_one :purchase
 
-## transactions 取引に関する情報管理テーブル
+## purchases 取引に関する情報管理テーブル
 
 | Column                     | Type       | Options                        |
 | -------------------------- | ---------- | ------------------------------ |
@@ -73,7 +73,7 @@ Things you may want to cover:
 
 - belongs_to :user
 - belongs_to :item
-- has_one :shipping_address
+- has_one :address
 
 ## addresses 配送先テーブル
 
@@ -85,8 +85,8 @@ Things you may want to cover:
 | address                 | string     | null: false                    |
 | building_name           | string     |                                |
 | phone_number            | string     | null: false                    |
-| transaction             | references | null: false, foreign_key: true |
+| purchase                | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :transaction
+- belongs_to :purchase
