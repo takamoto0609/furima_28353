@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.all.order(id: "DESC")
+    @purchases = Purchase.pluck(:item_id)
   end
 
   def new
@@ -30,6 +31,7 @@ class ItemsController < ApplicationController
     @shipping_area           = ShippingArea.find(@item.shipping_area_id)
     @estimated_delivery_date = EstimatedDeliveryDate.find(@item.estimated_delivery_date_id)
     @user                    = User.find(@item.user_id)
+    @purchases = Purchase.pluck(:item_id)
   end
 
   def edit
