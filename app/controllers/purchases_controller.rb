@@ -1,4 +1,6 @@
 class PurchasesController < ApplicationController
+  before_action :move_to_index
+  before_action :move_to_sign_in
 
   def new
     @item = Item.find(params[:item_id])
@@ -32,6 +34,19 @@ class PurchasesController < ApplicationController
       card: params[:token],    # カードトークン
       currency:'jpy'                 # 通貨の種類(日本円)
     )
+  end
+  
+  def move_to_index
+    @item = Item.find(params[:item_id])
+    if current_user.id == @item.user_id
+      redirect_to root_path
+    end
+  end
+
+  def move_to_sign_in
+    unless user_signed_in?
+      redirect_to new_user_session_path
+    end
   end
   
 end
