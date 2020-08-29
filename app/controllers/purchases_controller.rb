@@ -14,7 +14,7 @@ class PurchasesController < ApplicationController
       @purchase.save
       return redirect_to root_path
     else
-      return redirect_to root_path
+      return render "new"
     end
   end
 
