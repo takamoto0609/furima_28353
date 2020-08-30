@@ -16,6 +16,11 @@ RSpec.describe AddressPurchase, type: :model do
       it 'すべての値が正しく入力されていれば保存できること' do
         expect(@address_purchase).to be_valid
       end
+
+      it 'building_nameが空でも保存できること' do
+        @address_purchase.building_name = nil
+        expect(@address_purchase).to be_valid
+      end
     end
 
     context '取引情報の保存がうまくいかないとき' do
@@ -28,7 +33,7 @@ RSpec.describe AddressPurchase, type: :model do
       it 'postal_codeが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
         @address_purchase.postal_code = '1234567'
         @address_purchase.valid?
-        expect(@address_purchase.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+        expect(@address_purchase.errors.full_messages).to include("Postal code is invalid. Write correctly, need hyphen")
       end  
 
       it 'municipalitiesが空だと保存できないこと' do
