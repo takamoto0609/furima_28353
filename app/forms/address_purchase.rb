@@ -12,7 +12,7 @@ class AddressPurchase
     validates :user_id
     validates :item_id
   end
-  validates :shipping_area_id, numericality: { other_than: 1, message: "Select"}
+  validates :shipping_area_id, numericality: { other_than: 1, message: "Select"} 
 
   def save
     purchase = Purchase.create(user_id: user_id, item_id: item_id)
@@ -21,4 +21,5 @@ class AddressPurchase
     )
  
   end
+
 end
