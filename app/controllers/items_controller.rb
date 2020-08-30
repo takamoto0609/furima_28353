@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  before_action :move_to_index, except: [:index, :new, :create, :show]
 
   def index
     @items = Item.all.order(id: "DESC")
@@ -32,6 +33,9 @@ class ItemsController < ApplicationController
     @estimated_delivery_date = EstimatedDeliveryDate.find(@item.estimated_delivery_date_id)
     @user                    = User.find(@item.user_id)
     @purchases = Purchase.pluck(:item_id)
+    if @purchases.include?(@item.id)
+      redirect_to root_path
+    end
   end
 
   def edit
@@ -54,6 +58,13 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:name, :price, :explanation, :user_id, :category_id, :status_id, :shipping_fee_burden_id, :shipping_area_id, :estimated_delivery_date_id, :image).merge(user_id: current_user.id)
+  end
+
+  def move_to_index
+    item = Item.find(params[:id])
+    if current_user.id != item.user_id
+      redirect_to root_path
+    end
   end
 
 end
